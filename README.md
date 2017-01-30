@@ -1,6 +1,7 @@
 # Six Minute Walk Distance
 
 Designs: (Marvel app designs)[https://marvelapp.com/4jagfg7]
+
 Project management: (Waffle.io)[https://waffle.io/neilbo/six-minute-walk-distance]
 
 This is an open source six minute walk distance calculator often used for the six minute walk test.

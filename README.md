@@ -1,6 +1,7 @@
 # Six Minute Walk Distance
 
-TODO: Add link to designs
+Designs: (Marvel app designs)[https://marvelapp.com/4jagfg7]
+Project management: (Waffle.io)[https://waffle.io/neilbo/six-minute-walk-distance]
 
 This is an open source six minute walk distance calculator often used for the six minute walk test.
 If you are familiar with nursing, cardiac rehabilitation (phase 2), pulmonary rehabilitation this may make sense to you.

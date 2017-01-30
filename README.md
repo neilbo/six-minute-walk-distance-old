@@ -1,8 +1,4 @@
-# 
-
-<snippet>
-  <content><![CDATA[
-# ${1:Six Minute Walk Distance}
+# Six Minute Walk Distance
 
 This is an open source six minute walk distance calculator often used for the six minute walk test.
 If you are familiar with nursing, cardiac rehabilitation (phase 2), pulmonary rehabilitation this may make sense to you.
@@ -44,6 +40,3 @@ TODO: Write credits
 ## License
 
 TODO: Write license
-]]></content>
-  <tabTrigger>readme</tabTrigger>
-</snippet>

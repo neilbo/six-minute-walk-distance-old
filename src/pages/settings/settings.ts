@@ -12,4 +12,13 @@ export class SettingsPage {
 
   }
 
+  pageTitle: string = 'Settings';
+
+  items: any = [
+    'Formula'
+  ];
+
+   itemSelected(item: string) {
+    console.log("Selected Item", item);
+  }
 }

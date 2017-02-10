@@ -12,4 +12,6 @@ export class AboutPage {
 
   }
 
+  pageTitle: string = 'About';
+
 }

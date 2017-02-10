@@ -12,4 +12,7 @@ export class HomePage {
 
   }
 
+  pageTitle: string = 'Home';
+  methodType: string = "metric";
+
 }

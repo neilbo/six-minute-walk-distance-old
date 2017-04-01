@@ -10,6 +10,7 @@ import * as _ from 'lodash';
 })
 export class HomePage {
   metricForm: FormGroup;
+  imperialForm: FormGroup;
   pageTitle: string = 'Home';
   methodType: string = 'metric';
   submitAttempt: boolean;
@@ -21,8 +22,16 @@ export class HomePage {
       this.metricForm = this.formBuilder.group({
         cm: ['', Validators.required],
         kg: ['', Validators.required],
-        age: ['', AgeValidator.isValid],
+        ageMetric: ['', AgeValidator.isValid],
         gender: ['', Validators.required]
+      });
+
+      this.imperialForm = this.formBuilder.group({
+        feet: ['', Validators.required],
+        inches: ['', Validators.required],
+        lbs: ['', Validators.required],
+        ageImperial: ['', AgeValidator.isValid]
+        // gender: ['', Validators.required]
       });
   }
 
@@ -31,14 +40,14 @@ export class HomePage {
 
     let form = this.metricForm.value;
     let formEmpty = _.isEmpty(form.cm) ||
-    _.isEmpty(form.age) ||
+    _.isEmpty(form.ageMetric) ||
     _.isEmpty(form.kg) ||
     _.isEmpty(gender); 
 
     if (!formEmpty && gender == 'male') {
-      this.showDistance(this.maleDistance(form.cm, form.kg, form.age));
+      this.showDistance(this.maleDistance(form.cm, form.kg, form.ageMetric));
     } else if (!formEmpty && gender == 'female') {
-      this.showDistance(this.femaleDistance(form.cm, form.kg, form.age));
+      this.showDistance(this.femaleDistance(form.cm, form.kg, form.ageMetric));
     }
   }
   
@@ -61,4 +70,50 @@ export class HomePage {
     alert.present();
   }
 
+  calculateImperial() {
+    this.submitAttempt = true;
+
+    let form = this.imperialForm.value;
+    let formEmpty = _.isEmpty(form.feet) ||
+    _.isEmpty(form.inches) ||
+    _.isEmpty(form.lbs) ||
+    _.isEmpty(form.ageImperial);
+
+    let heightInInches = this.feetToInches(form.feet) + form.inches;
+    let heightInCm = this.cmToInches(heightInInches);
+    let weightKgs = this.lbsToKg(form.lbs);
+
+    console.log('heightInCm', heightInCm);
+    console.log('weightKgs', weightKgs);
+    console.log(this.maleDistance(heightInCm, weightKgs, form.ageImperial)+'m');
+
+    // male
+    // female
+    // calculate distance
+    // metres to inches.
+
+    console.log('form', form);
+    console.log('formEmpty', formEmpty);
+
+  }
+
+  feetToInches(feet) {
+    return feet * 12;
+  }
+
+  cmToInches(inches) {
+    return inches * 2.54;
+  }
+
+  lbsToKg(lbs) {
+    return lbs * 0.453592;
+  }
+
+  metresToInches(m) {
+    return m * 39.3701;
+  }
+
+  formatInches(inches) {
+    // format to 5"7
+  }
 }

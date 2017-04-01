@@ -79,18 +79,17 @@ export class HomePage {
     _.isEmpty(form.lbs) ||
     _.isEmpty(form.ageImperial);
 
-    let heightInInches = this.feetToInches(form.feet) + form.inches;
+    let heightInInches = _.toNumber(this.feetToInches(form.feet)) + _.toNumber(form.inches);
     let heightInCm = this.cmToInches(heightInInches);
     let weightKgs = this.lbsToKg(form.lbs);
 
-    console.log('heightInCm', heightInCm);
-    console.log('weightKgs', weightKgs);
     console.log(this.maleDistance(heightInCm, weightKgs, form.ageImperial)+'m');
 
+    let distanceInches = this.metresToInches(this.maleDistance(heightInCm, weightKgs, form.ageImperial));
+    this.formatInches(distanceInches);
+    
     // male
     // female
-    // calculate distance
-    // metres to inches.
 
     console.log('form', form);
     console.log('formEmpty', formEmpty);
@@ -115,5 +114,11 @@ export class HomePage {
 
   formatInches(inches) {
     // format to 5"7
+     let feet = Math.floor(inches / 12);
+     inches %= 12;
+     let distance = feet + "ft " + inches + 'in';
+     console.log(distance);
+     debugger
+     return distance
   }
 }

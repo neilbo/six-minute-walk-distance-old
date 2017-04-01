@@ -18,23 +18,34 @@
   <div [ngSwitch]="methodType">
 
     <div *ngSwitchCase="'metric'">
-      <ion-list>
-        <ion-item>
-          <ion-label stacked>Height (cm)</ion-label>
-          <ion-input type="number"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label stacked>Weight (kg)</ion-label>
-          <ion-input type="number"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label stacked>Age (years)</ion-label>
-          <ion-input type="number"></ion-input>
-        </ion-item>
-      </ion-list>
-      <div padding>
-        <button ion-button color="primary" block>Get Distance</button>
-      </div>
+       <form [formGroup]="metricForm" (ngSubmit)="calculateMetric()">
+        <ion-list no-lines>
+          <ion-item>
+            <ion-label stacked>Height (cm)</ion-label>
+            <ion-input type="number" formControlName="cm"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="!metricForm.controls.cm.valid && (metricForm.controls.cm.dirty || submitAttempt)">
+            <span class="form-error">Please enter a height</span>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>Weight (kg)</ion-label>
+            <ion-input type="number" formControlName="kg"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="!metricForm.controls.kg.valid && (metricForm.controls.kg.dirty || submitAttempt)">
+            <span class="form-error">Please enter a weight</span>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>Age (years)</ion-label>
+            <ion-input type="number" formControlName="ageMetric"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="!metricForm.controls.ageMetric.valid && (metricForm.controls.ageMetric.dirty || submitAttempt)">
+                <span class="form-error">Please enter a valid age</span>
+            </ion-item>
+        </ion-list>
+        <div padding>
+          <button ion-button color="primary" block type="submit">Calculate distance</button>
+        </div>
+      </form>
     </div>
 
     <div *ngSwitchCase="'imperial'">

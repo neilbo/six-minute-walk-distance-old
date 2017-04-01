@@ -13,12 +13,23 @@
     </ion-segment>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
   <div [ngSwitch]="methodType">
-
     <div *ngSwitchCase="'metric'">
-       <form [formGroup]="metricForm" (ngSubmit)="calculateMetric()">
+       <form [formGroup]="metricForm" (ngSubmit)="calculateMetric(metricForm.controls.gender.value)">
+         <ion-list radio-group formControlName="gender" no-lines>
+            <ion-item>
+                <ion-label>Male</ion-label>
+                <ion-radio value="male"></ion-radio>
+            </ion-item>
+            <ion-item>
+                <ion-label>Female</ion-label>
+                <ion-radio value="female"></ion-radio>
+            </ion-item>
+            <ion-item *ngIf="!metricForm.controls.gender.valid && (metricForm.controls.gender.dirty || submitAttempt)">
+            <span class="form-error">Please choose a gender</span>
+          </ion-item>
+        </ion-list>
         <ion-list no-lines>
           <ion-item>
             <ion-label stacked>Height (cm)</ion-label>
@@ -36,9 +47,9 @@
           </ion-item>
           <ion-item>
             <ion-label stacked>Age (years)</ion-label>
-            <ion-input type="number" formControlName="ageMetric"></ion-input>
+            <ion-input type="number" formControlName="age"></ion-input>
           </ion-item>
-          <ion-item *ngIf="!metricForm.controls.ageMetric.valid && (metricForm.controls.ageMetric.dirty || submitAttempt)">
+          <ion-item *ngIf="!metricForm.controls.age.valid && (metricForm.controls.age.dirty || submitAttempt)">
                 <span class="form-error">Please enter a valid age</span>
             </ion-item>
         </ion-list>

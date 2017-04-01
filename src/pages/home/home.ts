@@ -13,32 +13,44 @@ export class HomePage {
   pageTitle: string = 'Home';
   methodType: string = 'metric';
   submitAttempt: boolean;
-  maleDistance: any;
-  
+  genderRequiredError: boolean;
+
   constructor(public navCtrl: NavController, 
               public formBuilder: FormBuilder,
               public alertCtrl: AlertController) {
       this.metricForm = this.formBuilder.group({
         cm: ['', Validators.required],
         kg: ['', Validators.required],
-        ageMetric: ['', AgeValidator.isValid]
+        age: ['', AgeValidator.isValid],
+        gender: ['', Validators.required]
       });
   }
 
-  calculateMetric() {
+  calculateMetric(gender) {
     this.submitAttempt = true;
-    //TODO: Add in function for Gender
-    // Female = (2.11 x heightcm) - (2.29 x weightkg) - (5.78 x age) + 667 m
-    let metric = this.metricForm.value;
-    let formEmpty = _.isEmpty(metric.cm) ||
-    _.isEmpty(metric.ageMetric) ||
-    _.isEmpty(metric.kg); 
 
-    if (!formEmpty) {
-      this.maleDistance = ((7.57 * metric.cm) - (5.02 * metric.ageMetric) - (1.76 * metric.kg) - 309).toFixed(2);
-      this.showDistance(this.maleDistance);
+    let form = this.metricForm.value;
+    let formEmpty = _.isEmpty(form.cm) ||
+    _.isEmpty(form.age) ||
+    _.isEmpty(form.kg) ||
+    _.isEmpty(gender); 
+
+    if (!formEmpty && gender == 'male') {
+      this.showDistance(this.maleDistance(form.cm, form.kg, form.age));
+    } else if (!formEmpty && gender == 'female') {
+      this.showDistance(this.femaleDistance(form.cm, form.kg, form.age));
     }
   }
+  
+  maleDistance(height, weight, age) {
+    // Enright
+    return ((7.57 * height) - (5.02 * age) - (1.76 * weight) - 309).toFixed(2);
+  }
+
+  femaleDistance(height, weight, age) {
+    // Enright
+    return ((2.11 * height) - (2.29 * weight) - (5.78 * age) + 667).toFixed(2);
+  }  
 
   showDistance(distance) {
     let alert = this.alertCtrl.create({
@@ -48,4 +60,5 @@ export class HomePage {
     });
     alert.present();
   }
+
 }

@@ -16,8 +16,8 @@
 <ion-content>
   <div [ngSwitch]="methodType">
     <div *ngSwitchCase="'metric'">
-      <form [formGroup]="metricForm" (ngSubmit)="calculateMetric(metricForm.controls.gender.value)">
-        <ion-list radio-group formControlName="gender" no-lines>
+      <form [formGroup]="metricForm" (ngSubmit)="calculateMetric(metricForm.controls.genderMetric.value)">
+        <ion-list radio-group formControlName="genderMetric" no-lines>
           <ion-item>
             <ion-label>Male</ion-label>
             <ion-radio value="male"></ion-radio>
@@ -26,7 +26,7 @@
             <ion-label>Female</ion-label>
             <ion-radio value="female"></ion-radio>
           </ion-item>
-          <ion-item *ngIf="!metricForm.controls.gender.valid && (metricForm.controls.gender.dirty || submitAttempt)">
+          <ion-item *ngIf="!metricForm.controls.genderMetric.valid && (metricForm.controls.genderMetric.dirty || submitAttempt)">
             <span class="form-error">Please choose a gender</span>
           </ion-item>
         </ion-list>
@@ -60,7 +60,21 @@
     </div>
 
     <div *ngSwitchCase="'imperial'">
-      <form [formGroup]="imperialForm" (ngSubmit)="calculateImperial()">
+      <form [formGroup]="imperialForm" (ngSubmit)="calculateImperial(imperialForm.controls.genderImperial.value)">
+        <ion-list radio-group formControlName="genderImperial" no-lines>
+          <ion-item>
+            <ion-label>Male</ion-label>
+            <ion-radio value="male"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Female</ion-label>
+            <ion-radio value="female"></ion-radio>
+          </ion-item>
+          <ion-item *ngIf="!imperialForm.controls.genderImperial.valid && (imperialForm.controls.genderImperial.dirty || submitAttempt)">
+            <span class="form-error">Please choose a gender</span>
+          </ion-item>
+        </ion-list>
+
         <ion-list no-lines>
           <ion-item>
             <ion-label stacked>Height (feet)</ion-label>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
-import {Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { AgeValidator } from  '../../validators/age-validator';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { ValidationService } from  '../../services/validation-service';
 import * as _ from 'lodash';
 
 @Component({
@@ -19,10 +19,11 @@ export class HomePage {
   constructor(public navCtrl: NavController, 
               public formBuilder: FormBuilder,
               public alertCtrl: AlertController) {
+
       this.metricForm = this.formBuilder.group({
         cm: ['', Validators.required],
         kg: ['', Validators.required],
-        ageMetric: ['', AgeValidator.isValid],
+        ageMetric: ['', [Validators.required, ValidationService.ageValidator]],
         genderMetric: ['', Validators.required]
       });
 
@@ -30,10 +31,11 @@ export class HomePage {
         feet: ['', Validators.required],
         inches: ['', Validators.required],
         lbs: ['', Validators.required],
-        ageImperial: ['', AgeValidator.isValid],
+        ageImperial: ['', [Validators.required, ValidationService.ageValidator]],
         genderImperial: ['', Validators.required]
       });
   }
+
 
   calculateMetric(genderMetric) {
     this.submitAttempt = true;
@@ -75,6 +77,7 @@ export class HomePage {
   }
 
   calculateImperial(genderImperial) {
+    debugger;
     this.submitAttempt = true;
 
     let form = this.imperialForm.value;

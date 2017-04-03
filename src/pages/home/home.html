@@ -34,7 +34,7 @@
         <ion-list no-lines>
           <ion-item>
             <ion-label stacked>Height (cm)</ion-label>
-            <ion-input type="number" formControlName="cm"></ion-input>
+            <ion-input type="number" formControlName="cm" min="0"></ion-input>
           </ion-item>
           <ion-item *ngIf="!metricForm.controls.cm.valid && (metricForm.controls.cm.dirty || submitAttempt) 
                     || (!metricForm.controls.cm.valid && (metricForm.controls.cm.touched))">
@@ -42,7 +42,7 @@
           </ion-item>
           <ion-item>
             <ion-label stacked>Weight (kg)</ion-label>
-            <ion-input type="number" formControlName="kg"></ion-input>
+            <ion-input type="number" formControlName="kg" min="0"></ion-input>
           </ion-item>
           <ion-item *ngIf="!metricForm.controls.kg.valid && (metricForm.controls.kg.dirty || submitAttempt) 
                     || (!metricForm.controls.kg.valid && (metricForm.controls.kg.touched))">
@@ -50,7 +50,7 @@
           </ion-item>
           <ion-item>
             <ion-label stacked>Age (years)</ion-label>
-            <ion-input type="number" formControlName="ageMetric"></ion-input>
+            <ion-input type="number" formControlName="ageMetric" min="0"></ion-input>
           </ion-item>
           <ion-item *ngIf="!metricForm.controls.ageMetric.valid && (metricForm.controls.ageMetric.dirty || submitAttempt) 
                     || (!metricForm.controls.ageMetric.valid && (metricForm.controls.ageMetric.touched))">
@@ -58,7 +58,7 @@
           </ion-item>
         </ion-list>
         <div padding>
-          <button ion-button color="primary" block type="submit">Calculate distance</button>
+          <button ion-button color="primary" block type="submit">Get distance</button>
         </div>
       </form>
     </div>
@@ -83,7 +83,7 @@
         <ion-list no-lines>
           <ion-item>
             <ion-label stacked>Height (feet)</ion-label>
-            <ion-input type="number" formControlName="feet"></ion-input>
+            <ion-input type="number" formControlName="feet" min="0"></ion-input>
           </ion-item>
           <ion-item *ngIf="!imperialForm.controls.feet.valid && (imperialForm.controls.feet.dirty || submitAttempt) 
                     || (!imperialForm.controls.feet.valid && (imperialForm.controls.feet.touched))">
@@ -91,7 +91,7 @@
           </ion-item>
           <ion-item>
             <ion-label stacked>Height (inches 0-11)</ion-label>
-            <ion-input type="number" formControlName="inches"></ion-input>
+            <ion-input type="number" formControlName="inches" min="0"></ion-input>
           </ion-item>
           <ion-item *ngIf="!imperialForm.controls.inches.valid && (imperialForm.controls.inches.dirty || submitAttempt) 
                     || (!imperialForm.controls.inches.valid && (imperialForm.controls.inches.touched))">
@@ -99,7 +99,7 @@
           </ion-item>
           <ion-item>
             <ion-label stacked>Weight (lbs)</ion-label>
-            <ion-input type="number" formControlName="lbs"></ion-input>
+            <ion-input type="number" formControlName="lbs" min="0"></ion-input>
           </ion-item>
           <ion-item *ngIf="!imperialForm.controls.lbs.valid && (imperialForm.controls.lbs.dirty || submitAttempt) 
                     || (!imperialForm.controls.lbs.valid && (imperialForm.controls.lbs.touched))">
@@ -107,7 +107,7 @@
           </ion-item>
           <ion-item>
             <ion-label stacked>Age (years)</ion-label>
-            <ion-input type="number" formControlName="ageImperial"></ion-input>
+            <ion-input type="number" formControlName="ageImperial" min="0"></ion-input>
           </ion-item>
           <ion-item *ngIf="!imperialForm.controls.ageImperial.valid && (imperialForm.controls.ageImperial.dirty || submitAttempt) 
                     || (!imperialForm.controls.ageImperial.valid && (imperialForm.controls.ageImperial.touched))">

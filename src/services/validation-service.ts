@@ -8,6 +8,7 @@ export class ValidationService {
             'invalidEmailAddress': 'Please enter a valid email address',
             'invalidPassword': 'Please enter a valid password. Password must be at least 6 characters long, and contain a number.',
             'invalidAge': 'Please enter a valid age',
+            'invalidInches': 'Please enter a valid height in inches',
             'minlength': `Too short. Please enter at lease ${validatorValue.requiredLength} characters`
         };
 
@@ -48,6 +49,19 @@ export class ValidationService {
         const notANumber = isNaN(control.value);
 
         if (notWholeNumber || tooOld || notANumber) {
+            return { 'invalidAge': true };
+        } else {
+            return null;
+        }
+        
+    }
+
+    static inchesValidator(control) {
+        const betweenZeroAndEleven = control.value >= 0 && control.value <= 11;
+        const notANumber = isNaN(control.value);
+        const notWholeNumber = control.value % 1 !== 0;
+
+        if (notWholeNumber || !betweenZeroAndEleven || notANumber) {
             return { 'invalidAge': true };
         } else {
             return null;

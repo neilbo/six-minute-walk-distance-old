@@ -29,7 +29,7 @@ export class HomePage {
 
       this.imperialForm = this.formBuilder.group({
         feet: ['', Validators.required],
-        inches: ['', Validators.required],
+        inches: ['', [Validators.required,ValidationService.inchesValidator]],
         lbs: ['', Validators.required],
         ageImperial: ['', [Validators.required, ValidationService.ageValidator]],
         genderImperial: ['', Validators.required]

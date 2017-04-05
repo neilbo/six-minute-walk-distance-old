@@ -64,60 +64,7 @@
     </div>
 
     <div *ngSwitchCase="'imperial'">
-      <form [formGroup]="imperialForm" (ngSubmit)="calculateImperial(imperialForm.controls.genderImperial.value)">
-        <ion-list radio-group formControlName="genderImperial" no-lines>
-          <ion-item>
-            <ion-label>Male</ion-label>
-            <ion-radio value="male"></ion-radio>
-          </ion-item>
-          <ion-item>
-            <ion-label>Female</ion-label>
-            <ion-radio value="female"></ion-radio>
-          </ion-item>
-          <ion-item *ngIf="!imperialForm.controls.genderImperial.valid && (imperialForm.controls.genderImperial.dirty || submitAttempt) 
-                    || (!imperialForm.controls.genderImperial.valid && (imperialForm.controls.genderImperial.touched))">
-            <span class="form-error">Please choose a gender</span>
-          </ion-item>
-        </ion-list>
-
-        <ion-list no-lines>
-          <ion-item>
-            <ion-label stacked>Height (feet)</ion-label>
-            <ion-input type="number" formControlName="feet" min="0"></ion-input>
-          </ion-item>
-          <ion-item *ngIf="!imperialForm.controls.feet.valid && (imperialForm.controls.feet.dirty || submitAttempt) 
-                    || (!imperialForm.controls.feet.valid && (imperialForm.controls.feet.touched))">
-            <span class="form-error">Please enter a height in feet</span>
-          </ion-item>
-          <ion-item>
-            <ion-label stacked>Height (inches 0-11)</ion-label>
-            <ion-input type="number" formControlName="inches" min="0"></ion-input>
-          </ion-item>
-          <ion-item *ngIf="!imperialForm.controls.inches.valid && (imperialForm.controls.inches.dirty || submitAttempt) 
-                    || (!imperialForm.controls.inches.valid && (imperialForm.controls.inches.touched))">
-            <span class="form-error">Please enter a height in inches</span>
-          </ion-item>
-          <ion-item>
-            <ion-label stacked>Weight (lbs)</ion-label>
-            <ion-input type="number" formControlName="lbs" min="0"></ion-input>
-          </ion-item>
-          <ion-item *ngIf="!imperialForm.controls.lbs.valid && (imperialForm.controls.lbs.dirty || submitAttempt) 
-                    || (!imperialForm.controls.lbs.valid && (imperialForm.controls.lbs.touched))">
-            <span class="form-error">Please enter a weight</span>
-          </ion-item>
-          <ion-item>
-            <ion-label stacked>Age (years)</ion-label>
-            <ion-input type="number" formControlName="ageImperial" min="0" max="120"></ion-input>
-          </ion-item>
-          <ion-item *ngIf="!imperialForm.controls.ageImperial.valid && (imperialForm.controls.ageImperial.dirty || submitAttempt) 
-                    || (!imperialForm.controls.ageImperial.valid && (imperialForm.controls.ageImperial.touched))">
-            <span class="form-error">Please enter a valid age</span>
-          </ion-item>
-        </ion-list>
-        <div padding>
-          <button ion-button color="primary" block type="submit">Get Distance</button>
-        </div>
-      </form>
+      <imperial-form></imperial-form>
     </div>
 
   </div>

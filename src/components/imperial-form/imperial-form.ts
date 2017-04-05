@@ -65,7 +65,7 @@ export class ImperialForm {
     
      if (!formEmpty && genderImperial == 'male') {
       let distanceInchesMale = this.metresToInches(this.maleDistance(heightInCm, weightKgs, form.ageImperial));
-      this.showDistance(this.formatInches(distanceInches));
+      this.showDistance(this.formatInches(distanceInchesMale));
     } else if (!formEmpty && genderImperial == 'female') {
       let distanceInchesFemale = this.metresToInches(this.femaleDistance(heightInCm, weightKgs, form.ageImperial));
       this.showDistance(this.formatInches(distanceInchesFemale));
@@ -94,10 +94,4 @@ export class ImperialForm {
      let distance = feet + 'ft ' + inches.toFixed(2) + 'in';
      return distance
   }
-  formatMetres(m) {
-     let distance = m + 'm';
-     return distance
-  }
-      
-
 }

@@ -31,19 +31,23 @@ export class MetricForm {
     let formEmpty = _.isEmpty(form.cm) ||
     _.isEmpty(form.ageMetric) ||
     _.isEmpty(form.kg) ||
-    _.isEmpty(genderMetric); 
-
-    if (!formEmpty && genderMetric == 'male') {
+    _.isEmpty(form.genderMetric); 
+    
+    if (!formEmpty && form.genderMetric == 'male') {
       let maleMetricDistance = this.maleDistance(form.cm, form.kg, form.ageMetric);
       this.formatMetres(maleMetricDistance);
       this.showDistance(this.formatMetres(maleMetricDistance));
-    } else if (!formEmpty && genderMetric == 'female') {
+    } else if (!formEmpty && form.genderMetric == 'female') {
       let femaleMetricDistance = this.femaleDistance(form.cm, form.kg, form.ageMetric);
       this.formatMetres(femaleMetricDistance);
       this.showDistance(this.formatMetres(femaleMetricDistance));
     }
   }
-  
+  /**
+   * TODO: Seperate out this into a formulaService to handle Enright and Jenkins Calculations
+   * calculateService.enrightFormula(height, weight, age, gender)
+   * calculateService.jenkinsFormula(height, weight, age, gender)
+   */
   maleDistance(height, weight, age) {
     // Enright
     return ((7.57 * height) - (5.02 * age) - (1.76 * weight) - 309).toFixed(2);
@@ -55,13 +59,27 @@ export class MetricForm {
   }  
 
   showDistance(distance) {
-    let alert = this.alertCtrl.create({
+    let distanceAlert = this.alertCtrl.create({
       title: distance,
       subTitle: '',
-      buttons: ['OK']
-    });
-    alert.present();
+      buttons: [{
+        text: 'OK',
+        role: 'cancel',
+        handler: data => {
+          this.resetForm();
+        }
+      }]
+    })
+    distanceAlert.present();
   }
+
+  /**
+   * TODO: Seperate out this into a converterService to handle Enright and Jenkins Calculations
+   * converterService.feetToInches(feet)
+   * converterService.cmToInches(inches)
+   * converterService.lbsToKg(lbs)
+   * converterService.metresToInches(metres)
+   */
 
   feetToInches(feet) {
     return feet * 12;
@@ -79,15 +97,14 @@ export class MetricForm {
     return m * 39.3701;
   }
 
-  formatInches(inches) {
-     let feet = Math.floor(inches / 12);
-     inches %= 12;
-     let distance = feet + 'ft ' + inches.toFixed(2) + 'in';
-     return distance
-  }
   formatMetres(m) {
      let distance = m + 'm';
      return distance
   }
-
+  /*
+    Reset form after submit?
+  */
+  resetForm() {
+    this.metricForm.reset();
+  }
 }

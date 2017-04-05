@@ -35,12 +35,18 @@ export class ImperialForm {
   }
   
   showDistance(distance) {
-    let alert = this.alertCtrl.create({
+    let distanceAlert = this.alertCtrl.create({
       title: distance,
       subTitle: '',
-      buttons: ['OK']
-    });
-    alert.present();
+      buttons: [{
+        text: 'OK',
+        role: 'cancel',
+        handler: data => {
+          this.resetForm();
+        }
+      }]
+    })
+    distanceAlert.present();
   }
 
   calculateImperial(genderImperial) {
@@ -93,5 +99,8 @@ export class ImperialForm {
      inches %= 12;
      let distance = feet + 'ft ' + inches.toFixed(2) + 'in';
      return distance
+  }
+  resetForm() {
+    this.imperialForm.reset();
   }
 }

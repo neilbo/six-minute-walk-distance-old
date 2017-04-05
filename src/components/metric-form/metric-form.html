@@ -1,0 +1,45 @@
+<form [formGroup]="metricForm" (ngSubmit)="calculateMetric(metricForm.controls.genderMetric.value)">
+  <ion-list radio-group formControlName="genderMetric" no-lines>
+    <ion-item>
+      <ion-label>Male</ion-label>
+      <ion-radio value="male"></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Female</ion-label>
+      <ion-radio value="female"></ion-radio>
+    </ion-item>
+    <ion-item *ngIf="!metricForm.controls.genderMetric.valid && (metricForm.controls.genderMetric.dirty || submitAttempt) 
+                    || (!metricForm.controls.genderMetric.valid && (metricForm.controls.genderMetric.touched))">
+      <span class="form-error">Please choose a gender</span>
+    </ion-item>
+  </ion-list>
+  <ion-list no-lines>
+    <ion-item>
+      <ion-label stacked>Height (cm)</ion-label>
+      <ion-input type="number" formControlName="cm" min="0"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!metricForm.controls.cm.valid && (metricForm.controls.cm.dirty || submitAttempt) 
+                    || (!metricForm.controls.cm.valid && (metricForm.controls.cm.touched))">
+      <span class="form-error">Please enter a valid age</span>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Weight (kg)</ion-label>
+      <ion-input type="number" formControlName="kg" min="0"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!metricForm.controls.kg.valid && (metricForm.controls.kg.dirty || submitAttempt) 
+                    || (!metricForm.controls.kg.valid && (metricForm.controls.kg.touched))">
+      <span class="form-error">Please enter a valid weight</span>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Age (years)</ion-label>
+      <ion-input type="number" formControlName="ageMetric" min="0" max="120"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="!metricForm.controls.ageMetric.valid && (metricForm.controls.ageMetric.dirty || submitAttempt) 
+                    || (!metricForm.controls.ageMetric.valid && (metricForm.controls.ageMetric.touched))">
+      <span class="form-error">Please enter a valid age</span>
+    </ion-item>
+  </ion-list>
+  <div padding>
+    <button ion-button color="primary" block type="submit">Get distance</button>
+  </div>
+</form>

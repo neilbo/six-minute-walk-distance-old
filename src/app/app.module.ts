@@ -7,12 +7,14 @@ import { SettingsPage } from '../pages/settings/settings';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ImperialForm } from '../components/imperial-form/imperial-form';
+import { MetricForm } from '../components/metric-form/metric-form';
 
 @NgModule({
   declarations: [
     MyApp,
     ControlMessages,
     ImperialForm,
+    MetricForm,
     AboutPage,
     SettingsPage,
     HomePage,
@@ -26,6 +28,7 @@ import { ImperialForm } from '../components/imperial-form/imperial-form';
     MyApp,
     ControlMessages,
     ImperialForm,
+    MetricForm,
     AboutPage,
     SettingsPage,
     HomePage,

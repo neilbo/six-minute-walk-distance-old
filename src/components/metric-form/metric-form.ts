@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ValidationService } from  '../../services/validation-service';
+import { ValidationService } from '../../services/validation-service';
+import { CalculateService } from '../../providers/calculate-service';
 import * as _ from 'lodash';
 
 @Component({
@@ -11,56 +12,40 @@ import * as _ from 'lodash';
 export class MetricForm {
   metricForm: FormGroup;
   submitAttempt: boolean;
+  formEmpty: boolean;
+  form: any;
 
-  constructor(public navCtrl: NavController, 
-              public formBuilder: FormBuilder,
-              public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController,
+    public formBuilder: FormBuilder,
+    public calculate: CalculateService,
+    public alertCtrl: AlertController) {
+    
+    this.metricForm = this.formBuilder.group({
+      cm: ['', ValidationService.cmRequired],
+      kg: ['', ValidationService.kgRequired],
+      ageMetric: ['', [ValidationService.ageRequired, ValidationService.ageValidate]],
+      genderMetric: ['', ValidationService.genderRequired]
+    });
 
-      this.metricForm = this.formBuilder.group({
-        cm: ['', ValidationService.cmRequired],
-        kg: ['', ValidationService.kgRequired],
-        ageMetric: ['', [ValidationService.ageRequired, ValidationService.ageValidate]],
-        genderMetric: ['', ValidationService.genderRequired]
-      });
+
   }
 
   calculateMetric(genderMetric) {
     this.submitAttempt = true;
+    this.form = this.metricForm.value;
 
-    let form = this.metricForm.value;
-    let formEmpty = _.isEmpty(form.cm) ||
-    _.isEmpty(form.ageMetric) ||
-    _.isEmpty(form.kg) ||
-    _.isEmpty(form.genderMetric); 
+    this.formEmpty = _.isEmpty(this.form.cm) ||
+      _.isEmpty(this.form.ageMetric) ||
+      _.isEmpty(this.form.kg) ||
+      _.isEmpty(this.form.genderMetric);
 
-    if (formEmpty) {
-      this.showError('Error', 'All fields required')
-    }
-    
-    if (!formEmpty && form.genderMetric == 'male') {
-      let maleMetricDistance = this.maleDistance(form.cm, form.kg, form.ageMetric);
-      this.formatMetres(maleMetricDistance);
-      this.showDistance(this.formatMetres(maleMetricDistance));
-    } else if (!formEmpty && form.genderMetric == 'female') {
-      let femaleMetricDistance = this.femaleDistance(form.cm, form.kg, form.ageMetric);
-      this.formatMetres(femaleMetricDistance);
-      this.showDistance(this.formatMetres(femaleMetricDistance));
+    if (!this.formEmpty) {
+      let metricDistance = this.calculate.enrightForumla(this.form.cm, this.form.kg, this.form.ageMetric, this.form.genderMetric);
+      this.showDistance(this.formatDistance(metricDistance));
+    } else {
+      this.showError('Error', `Check that all fields <br />have been filled in.`);
     }
   }
-  /**
-   * TODO: Seperate out this into a formulaService to handle Enright and Jenkins Calculations
-   * calculateService.enrightFormula(height, weight, age, gender)
-   * calculateService.jenkinsFormula(height, weight, age, gender)
-   */
-  maleDistance(height, weight, age) {
-    // Enright
-    return ((7.57 * height) - (5.02 * age) - (1.76 * weight) - 309).toFixed(2);
-  }
-
-  femaleDistance(height, weight, age) {
-    // Enright
-    return ((2.11 * height) - (2.29 * weight) - (5.78 * age) + 667).toFixed(2);
-  }  
 
   showDistance(distance) {
     let distanceAlert = this.alertCtrl.create({
@@ -88,37 +73,10 @@ export class MetricForm {
     emptyForm.present();
   }
 
-  /**
-   * TODO: Seperate out this into a converterService to handle Enright and Jenkins Calculations
-   * converterService.feetToInches(feet)
-   * converterService.cmToInches(inches)
-   * converterService.lbsToKg(lbs)
-   * converterService.metresToInches(metres)
-   */
-
-  feetToInches(feet) {
-    return feet * 12;
+  formatDistance(distance) {
+    return distance + 'm';
   }
 
-  cmToInches(inches) {
-    return inches * 2.54;
-  }
-
-  lbsToKg(lbs) {
-    return lbs * 0.453592;
-  }
-
-  metresToInches(m) {
-    return m * 39.3701;
-  }
-
-  formatMetres(m) {
-     let distance = m + 'm';
-     return distance
-  }
-  /*
-    Reset form after submit?
-  */
   resetForm() {
     this.metricForm.reset();
   }

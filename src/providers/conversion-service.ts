@@ -1,0 +1,26 @@
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class ConversionService {
+
+  constructor() {
+    console.log('Hello ConversionService Provider');
+  }
+
+  feetToInches(feet) {
+    return feet * 12;
+  }
+
+  cmToInches(inches) {
+    return inches * 2.54;
+  }
+
+  lbsToKg(lbs) {
+    return lbs * 0.453592;
+  }
+
+  metresToInches(m) {
+    return m * 39.3701;
+  }
+
+}

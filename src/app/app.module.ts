@@ -8,6 +8,9 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ImperialForm } from '../components/imperial-form/imperial-form';
 import { MetricForm } from '../components/metric-form/metric-form';
+import { FormulaService } from '../providers/formula-service';
+import { CalculateService } from '../providers/calculate-service';
+import { ConversionService } from '../providers/conversion-service';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,6 @@ import { MetricForm } from '../components/metric-form/metric-form';
     HomePage,
     TabsPage
   ],
-  providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }]
+  providers: [FormulaService, CalculateService, ConversionService, { provide: ErrorHandler, useClass: IonicErrorHandler }]
 })
 export class AppModule { }

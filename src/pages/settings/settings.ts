@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { FormulaService } from '../../providers/formula-service'
 
 @Component({
   selector: 'page-settings',
@@ -7,19 +8,17 @@ import { NavController } from 'ionic-angular';
 })
 export class SettingsPage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, 
+              private formulaService: FormulaService) {
 
   }
 
   pageTitle: string = 'Settings';
-  formula: any
+  formula: any;
   
-  logSelected() {
+  setFormula() {
     console.log('formula', this.formula);
-    //TODO: send value to formula service that sets this.
-    // import ForumulaSerivce,
-    // call formulaServce.setFormula(value),
-    // in home.ts call formulaServce.getFormula(),
+    this.formulaService.setFormula(this.formula);
   }
   
 }

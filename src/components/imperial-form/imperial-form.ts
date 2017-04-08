@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ValidationService } from  '../../services/validation-service';
+import { ValidationService } from '../../services/validation-service';
+import { CalculateService } from '../../providers/calculate-service';
+import { ConversionService } from '../../providers/conversion-service';
 import * as _ from 'lodash';
 
 @Component({
@@ -11,29 +13,51 @@ import * as _ from 'lodash';
 export class ImperialForm {
   imperialForm: FormGroup;
   submitAttempt: boolean;
+  formEmpty: boolean;
+  form: any;
 
-  constructor(public navCtrl: NavController, 
-              public formBuilder: FormBuilder,
-              public alertCtrl: AlertController) {
-  this.imperialForm = this.formBuilder.group({
-        feet: ['', ValidationService.feetValidate],
-        inches: ['', [ValidationService.inchesRequired, ValidationService.inchesValidate]],
-        lbs: ['', ValidationService.lbsRequired],
-        ageImperial: ['', [ValidationService.ageRequired, ValidationService.ageValidate]],
-        genderImperial: ['', ValidationService.genderRequired]
-      });
+  constructor(public navCtrl: NavController,
+    public formBuilder: FormBuilder,
+    public calculate: CalculateService,
+    public convert: ConversionService,
+    public alertCtrl: AlertController) {
+    
+    this.imperialForm = this.formBuilder.group({
+      feet: ['', ValidationService.feetValidate],
+      inches: ['', [ValidationService.inchesRequired, ValidationService.inchesValidate]],
+      lbs: ['', ValidationService.lbsRequired],
+      ageImperial: ['', [ValidationService.ageRequired, ValidationService.ageValidate]],
+      genderImperial: ['', ValidationService.genderRequired]
+    });
   }
 
-  maleDistance(height, weight, age) {
-    // Enright
-    return ((7.57 * height) - (5.02 * age) - (1.76 * weight) - 309).toFixed(2);
+  calculateImperial(genderImperial) {
+    this.submitAttempt = true;
+    this.form = this.imperialForm.value;
+
+    this.formEmpty = _.isEmpty(this.form.feet) ||
+      _.isEmpty(this.form.inches) ||
+      _.isEmpty(this.form.lbs) ||
+      _.isEmpty(this.form.genderImperial) ||
+      _.isEmpty(this.form.ageImperial);
+
+    let heightInInches = _.toNumber(this.convert.feetToInches(this.form.feet)) + _.toNumber(this.form.inches);
+    let heightInCm = this.convert.cmToInches(heightInInches);
+    let weightKgs = this.convert.lbsToKg(this.form.lbs);
+
+    console.log(this.calculate.enrightForumla(heightInCm, weightKgs, this.form.ageImperial, this.form.genderImperial) + 'm');
+
+    let distanceInches = this.convert.metresToInches(this.calculate.enrightForumla(heightInCm, weightKgs, this.form.ageImperial, this.form.genderImperial));
+    this.formatInches(distanceInches);
+
+    if (!this.formEmpty) {
+      let imperialDistance = this.convert.metresToInches(distanceInches);
+      this.showDistance(this.formatInches(imperialDistance));
+    } else {
+      this.showError('Error', 'All fields required')
+    }
   }
 
-  femaleDistance(height, weight, age) {
-    // Enright
-    return ((2.11 * height) - (2.29 * weight) - (5.78 * age) + 667).toFixed(2);
-  }
-  
   showDistance(distance) {
     let distanceAlert = this.alertCtrl.create({
       title: distance,
@@ -49,65 +73,6 @@ export class ImperialForm {
     distanceAlert.present();
   }
 
-  calculateImperial(genderImperial) {
-    debugger;
-    this.submitAttempt = true;
-
-    let form = this.imperialForm.value;
-    let formEmpty = _.isEmpty(form.feet) ||
-    _.isEmpty(form.inches) ||
-    _.isEmpty(form.lbs) ||
-    _.isEmpty(form.genderImperial) ||
-    _.isEmpty(form.ageImperial);
-
-    if (formEmpty) {
-      this.showError('Error', 'All fields required')
-    }
-
-    let heightInInches = _.toNumber(this.feetToInches(form.feet)) + _.toNumber(form.inches);
-    let heightInCm = this.cmToInches(heightInInches);
-    let weightKgs = this.lbsToKg(form.lbs);
-
-    console.log(this.maleDistance(heightInCm, weightKgs, form.ageImperial)+'m');
-
-    let distanceInches = this.metresToInches(this.maleDistance(heightInCm, weightKgs, form.ageImperial));
-    this.formatInches(distanceInches);
-    
-     if (!formEmpty && genderImperial == 'male') {
-      let distanceInchesMale = this.metresToInches(this.maleDistance(heightInCm, weightKgs, form.ageImperial));
-      this.showDistance(this.formatInches(distanceInchesMale));
-    } else if (!formEmpty && genderImperial == 'female') {
-      let distanceInchesFemale = this.metresToInches(this.femaleDistance(heightInCm, weightKgs, form.ageImperial));
-      this.showDistance(this.formatInches(distanceInchesFemale));
-    }
-
-  }
-  feetToInches(feet) {
-    return feet * 12;
-  }
-
-  cmToInches(inches) {
-    return inches * 2.54;
-  }
-
-  lbsToKg(lbs) {
-    return lbs * 0.453592;
-  }
-
-  metresToInches(m) {
-    return m * 39.3701;
-  }
-
-  formatInches(inches) {
-     let feet = Math.floor(inches / 12);
-     inches %= 12;
-     let distance = feet + 'ft ' + inches.toFixed(2) + 'in';
-     return distance
-  }
-  resetForm() {
-    this.imperialForm.reset();
-  }
-  
   showError(title, errorMessage) {
     let emptyForm = this.alertCtrl.create({
       title: title,
@@ -117,5 +82,16 @@ export class ImperialForm {
       }]
     })
     emptyForm.present();
+  }
+
+  formatInches(inches) {
+    let feet = Math.floor(inches / 12);
+    inches %= 12;
+    let distance = feet + 'ft ' + inches.toFixed(2) + 'in';
+    return distance
+  }
+
+  resetForm() {
+    this.imperialForm.reset();
   }
 }

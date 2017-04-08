@@ -54,7 +54,7 @@ export class ImperialForm {
       let imperialDistance = this.convert.metresToInches(distanceInches);
       this.showDistance(this.formatDistance(imperialDistance));
     } else {
-      this.showError('Error', 'All fields required')
+      this.showError('Error', `Check that all fields <br />have been filled in.`);
     }
   }
 

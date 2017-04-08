@@ -26,8 +26,6 @@ export class MetricForm {
       ageMetric: ['', [ValidationService.ageRequired, ValidationService.ageValidate]],
       genderMetric: ['', ValidationService.genderRequired]
     });
-
-
   }
 
   calculateMetric(genderMetric) {
@@ -73,8 +71,8 @@ export class MetricForm {
     emptyForm.present();
   }
 
-  formatDistance(distance) {
-    return distance + 'm';
+  formatDistance(metres) {
+    return metres + 'm';
   }
 
   resetForm() {

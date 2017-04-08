@@ -48,11 +48,11 @@ export class ImperialForm {
     console.log(this.calculate.enrightForumla(heightInCm, weightKgs, this.form.ageImperial, this.form.genderImperial) + 'm');
 
     let distanceInches = this.convert.metresToInches(this.calculate.enrightForumla(heightInCm, weightKgs, this.form.ageImperial, this.form.genderImperial));
-    this.formatInches(distanceInches);
+    this.formatDistance(distanceInches);
 
     if (!this.formEmpty) {
       let imperialDistance = this.convert.metresToInches(distanceInches);
-      this.showDistance(this.formatInches(imperialDistance));
+      this.showDistance(this.formatDistance(imperialDistance));
     } else {
       this.showError('Error', 'All fields required')
     }
@@ -84,11 +84,10 @@ export class ImperialForm {
     emptyForm.present();
   }
 
-  formatInches(inches) {
+  formatDistance(inches) {
     let feet = Math.floor(inches / 12);
     inches %= 12;
-    let distance = feet + 'ft ' + inches.toFixed(2) + 'in';
-    return distance
+    return feet + 'ft ' + inches.toFixed(2) + 'in';
   }
 
   resetForm() {

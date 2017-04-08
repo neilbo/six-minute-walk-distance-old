@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ValidationService } from  '../../services/validation-service';
 import * as _ from 'lodash';
 

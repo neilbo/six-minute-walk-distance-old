@@ -1,9 +1,15 @@
 import { FormControl } from '@angular/forms';
+import * as _ from 'lodash';
  
 export class AgeValidator {
  
     static isValid(control: FormControl): any {
- 
+
+        if (_.isEmpty(control.value)) {
+            return {
+                "age is required": true
+            };
+        }
         if(isNaN(control.value)){
             return {
                 "not a number": true

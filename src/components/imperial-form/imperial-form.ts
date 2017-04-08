@@ -16,11 +16,11 @@ export class ImperialForm {
               public formBuilder: FormBuilder,
               public alertCtrl: AlertController) {
   this.imperialForm = this.formBuilder.group({
-        feet: ['', Validators.required],
-        inches: ['', [Validators.required,ValidationService.inchesValidator]],
-        lbs: ['', Validators.required],
-        ageImperial: ['', [Validators.required, ValidationService.ageValidator]],
-        genderImperial: ['', Validators.required]
+        feet: ['', ValidationService.feetValidate],
+        inches: ['', [ValidationService.inchesRequired, ValidationService.inchesValidate]],
+        lbs: ['', ValidationService.lbsRequired],
+        ageImperial: ['', [ValidationService.ageRequired, ValidationService.ageValidate]],
+        genderImperial: ['', ValidationService.genderRequired]
       });
   }
 
@@ -59,6 +59,10 @@ export class ImperialForm {
     _.isEmpty(form.lbs) ||
     _.isEmpty(form.genderImperial) ||
     _.isEmpty(form.ageImperial);
+
+    if (formEmpty) {
+      this.showError('Error', 'All fields required')
+    }
 
     let heightInInches = _.toNumber(this.feetToInches(form.feet)) + _.toNumber(form.inches);
     let heightInCm = this.cmToInches(heightInInches);
@@ -102,5 +106,16 @@ export class ImperialForm {
   }
   resetForm() {
     this.imperialForm.reset();
+  }
+  
+  showError(title, errorMessage) {
+    let emptyForm = this.alertCtrl.create({
+      title: title,
+      subTitle: errorMessage,
+      buttons: [{
+        text: 'OK',
+      }]
+    })
+    emptyForm.present();
   }
 }

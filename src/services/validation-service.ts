@@ -1,12 +1,20 @@
 
+import * as _ from 'lodash';
+
 export class ValidationService {
-    static getValidatorErrorMessage(validatorName: string, validatorValue?: any) {
-        let config = {
+    static getValidatorErrorMessage(validatorName: string, validatorValue?: any, validatorInstance?: any) {
+        const config = {
             'required': `This is required`,
+            'required_age': `Please enter an age`,
+            'required_height_cm': `Please enter a height in cm`,
+            'required_weight_lbs': `Please enter a weight in lbs`,
+            'required_weight_kg': `Please enter a weight in kg`,
+            'required_height_feet': `Please enter a height in feet`,
+            'required_height_inch': `Please enter a height in inches`,
             'invalidCreditCard': 'Please enter valid credit card number',
             'invalidEmailAddress': 'Please enter a valid email address',
             'invalidPassword': 'Please enter a valid password. Password must be at least 6 characters long, and contain a number.',
-            'invalidAge': 'Please enter a valid age',
+            'invalid_age': 'Please enter a valid age',
             'invalidInches': 'Please enter a valid height in inches',
             'minlength': `Too short. Please enter at lease ${validatorValue.requiredLength} characters`
         };
@@ -42,29 +50,82 @@ export class ValidationService {
         }
     }
 
-    static ageValidator(control) {
+    static ageValidate(control) {
         const notWholeNumber = control.value % 1 !== 0;
         const tooOld = control.value > 120;
+        const tooYoung = control.value < 1;
         const notANumber = isNaN(control.value);
 
-        if (notWholeNumber || tooOld || notANumber) {
-            return { 'invalidAge': true };
+        if (notWholeNumber || tooOld || tooYoung || notANumber) {
+            return { 'invalid_age': true };
         } else {
             return null;
         }
-        
     }
 
-    static inchesValidator(control) {
+    static ageRequired(control) {
+        const isEmpty = _.isEmpty(control.value);
+
+        if (isEmpty) {
+            return { 'required_age': true };
+        }
+        return null;
+    }
+
+    static cmRequired(control) {
+        const isEmpty = _.isEmpty(control.value);
+        if (isEmpty) {
+            return { 'required_height_cm': true };
+        }
+        return null;
+
+    }
+
+    static feetValidate(control) {
+        const isEmpty = _.isEmpty(control.value);
+        if (isEmpty) {
+            return { 'required_height_feet': true };
+        }
+
+    }
+    static kgRequired(control) {
+        const isEmpty = _.isEmpty(control.value);
+        if (isEmpty) {
+            return { 'required_weight_kg': true };
+        }
+    }
+    static lbsRequired(control) {
+        const isEmpty = _.isEmpty(control.value);
+        if (isEmpty) {
+            return { 'required_weight_lbs': true };
+        }
+    }
+
+    static genderRequired(control) {
+        const isEmpty = _.isEmpty(control.value);
+        if (isEmpty) {
+            return { 'required_gender': true };
+        }
+    }
+
+    static inchesRequired(control) {
+        const isEmpty = _.isEmpty(control.value);
+        if (isEmpty) {
+            return { 'required_height_inch': true };
+        }
+        return null;
+
+    }
+
+    static inchesValidate(control) {
         const betweenZeroAndEleven = control.value >= 0 && control.value <= 11;
         const notANumber = isNaN(control.value);
         const notWholeNumber = control.value % 1 !== 0;
-
         if (notWholeNumber || !betweenZeroAndEleven || notANumber) {
             return { 'invalidAge': true };
         } else {
             return null;
         }
-        
+
     }
 }

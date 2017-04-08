@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ValidationService } from  '../../services/validation-service';
 import * as _ from 'lodash';
 
@@ -17,10 +17,10 @@ export class MetricForm {
               public alertCtrl: AlertController) {
 
       this.metricForm = this.formBuilder.group({
-        cm: ['', Validators.required],
-        kg: ['', Validators.required],
-        ageMetric: ['', [Validators.required, ValidationService.ageValidator]],
-        genderMetric: ['', Validators.required]
+        cm: ['', ValidationService.cmRequired],
+        kg: ['', ValidationService.kgRequired],
+        ageMetric: ['', [ValidationService.ageRequired, ValidationService.ageValidate]],
+        genderMetric: ['', ValidationService.genderRequired]
       });
   }
 
@@ -32,6 +32,10 @@ export class MetricForm {
     _.isEmpty(form.ageMetric) ||
     _.isEmpty(form.kg) ||
     _.isEmpty(form.genderMetric); 
+
+    if (formEmpty) {
+      this.showError('Error', 'All fields required')
+    }
     
     if (!formEmpty && form.genderMetric == 'male') {
       let maleMetricDistance = this.maleDistance(form.cm, form.kg, form.ageMetric);
@@ -71,6 +75,17 @@ export class MetricForm {
       }]
     })
     distanceAlert.present();
+  }
+
+  showError(title, errorMessage) {
+    let emptyForm = this.alertCtrl.create({
+      title: title,
+      subTitle: errorMessage,
+      buttons: [{
+        text: 'OK',
+      }]
+    })
+    emptyForm.present();
   }
 
   /**

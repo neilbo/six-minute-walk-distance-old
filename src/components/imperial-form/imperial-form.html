@@ -17,8 +17,9 @@
         <ion-list no-lines>
           <ion-item>
             <ion-label stacked>Height (feet)</ion-label>
-            <ion-input type="number" formControlName="feet" min="0"></ion-input>
+            <ion-input type="number" formControlName="feet" min="1"></ion-input>
           </ion-item>
+          <control-messages [control]="imperialForm.controls.feet"></control-messages>
           <!--<ion-item *ngIf="!imperialForm.controls.feet.valid && (imperialForm.controls.feet.dirty || submitAttempt) 
                     || (!imperialForm.controls.feet.valid && (imperialForm.controls.feet.touched))">
             <span class="form-error">Please enter a height in feet</span>
@@ -27,22 +28,27 @@
             <ion-label stacked>Height (inches 0-11)</ion-label>
             <ion-input type="number" formControlName="inches" min="0"></ion-input>
           </ion-item>
+          <control-messages [control]="imperialForm.controls.inches"></control-messages>
+          
           <!--<ion-item *ngIf="!imperialForm.controls.inches.valid && (imperialForm.controls.inches.dirty || submitAttempt) 
                     || (!imperialForm.controls.inches.valid && (imperialForm.controls.inches.touched))">
             <span class="form-error">Please enter a height in inches</span>
           </ion-item>-->
           <ion-item>
             <ion-label stacked>Weight (lbs)</ion-label>
-            <ion-input type="number" formControlName="lbs" min="0"></ion-input>
+            <ion-input type="number" formControlName="lbs" min="1"></ion-input>
           </ion-item>
+          <control-messages [control]="imperialForm.controls.lbs"></control-messages>
           <!--<ion-item *ngIf="!imperialForm.controls.lbs.valid && (imperialForm.controls.lbs.dirty || submitAttempt) 
                     || (!imperialForm.controls.lbs.valid && (imperialForm.controls.lbs.touched))">
             <span class="form-error">Please enter a weight</span>
           </ion-item>-->
           <ion-item>
             <ion-label stacked>Age (years)</ion-label>
-            <ion-input type="number" formControlName="ageImperial" min="0" max="120"></ion-input>
+            <ion-input type="number" formControlName="ageImperial" min="1" max="120"></ion-input>
           </ion-item>
+          <control-messages [control]="imperialForm.controls.ageImperial"></control-messages>
+          
           <!--<ion-item *ngIf="!imperialForm.controls.ageImperial.valid && (imperialForm.controls.ageImperial.dirty || submitAttempt) 
                     || (!imperialForm.controls.ageImperial.valid && (imperialForm.controls.ageImperial.touched))">
             <span class="form-error">Please enter a valid age</span>

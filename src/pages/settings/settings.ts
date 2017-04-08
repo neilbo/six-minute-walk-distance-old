@@ -10,7 +10,6 @@ export class SettingsPage {
 
   constructor(public navCtrl: NavController, 
               private formulaService: FormulaService) {
-
   }
 
   pageTitle: string = 'Settings';

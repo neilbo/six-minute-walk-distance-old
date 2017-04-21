@@ -20,6 +20,14 @@ If you are familiar with nursing, cardiac rehabilitation (phase 2), pulmonary re
 2. install ionic `npm install -g ionic cordova`
 3. run ionic `ionic serve`
 
+## Getting started
+
+1. Install ios deploy `sudo npm install -g ios-deploy --unsafe-perm=true --allow-root`
+2. Install ios sim `sudo npm install -g ios-sim`
+
+## Tests
+
+TODO: Write tests instructions
 
 ## Usage
 

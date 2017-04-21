@@ -27,6 +27,9 @@ If you are familiar with nursing, cardiac rehabilitation (phase 2), pulmonary re
 
 ## Tests
 
+Follow [this guide](http://roblouie.com/article/376/ionic-2-set-up-unit-testing-the-best-way/) 
+by [@roblouie](https://github.com/roblouie/) for setup unit tests
+
 TODO: Write tests instructions
 
 ## Usage

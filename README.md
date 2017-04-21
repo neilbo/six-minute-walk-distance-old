@@ -1,8 +1,8 @@
 # Six Minute Walk Distance
 
-Designs: (Marvel app designs)[https://marvelapp.com/4jagfg7]
+Designs: [Marvel app](https://marvelapp.com/4jagfg7)
 
-Project management: (Waffle.io)[https://waffle.io/neilbo/six-minute-walk-distance]
+Project management: [Waffle.io](https://waffle.io/neilbo/six-minute-walk-distance)
 
 This is an open source six minute walk distance calculator often used for the six minute walk test.
 If you are familiar with nursing, cardiac rehabilitation (phase 2), pulmonary rehabilitation this may make sense to you.
@@ -30,11 +30,31 @@ If you are familiar with nursing, cardiac rehabilitation (phase 2), pulmonary re
 Follow [this guide](http://roblouie.com/article/376/ionic-2-set-up-unit-testing-the-best-way/) 
 by [@roblouie](https://github.com/roblouie/) for setup unit tests
 
-TODO: Write tests instructions
+Uses 
+* [Karma](https://karma-runner.github.io/1.0/index.html) - Test Runner 
+* [Jasmine](https://jasmine.github.io/2.0/introduction.html) - Testing Framework
 
-## Usage
+Please read for adding unit tests to ionicframework
+ * https://forum.ionicframework.com/t/ionic-2-x-official-unit-testing-example/83527
+ * https://github.com/driftyco/ionic-unit-testing-example
+ * http://roblouie.com/article/376/ionic-2-set-up-unit-testing-the-best-way/
+ * https://github.com/roblouie/unit-testing-demo
 
-TODO: Write usage instructions
+Run unit tests: in another terminal window
+
+```
+npm test
+```
+Will open it up in Chrome where you can debug
+
+Unit tests:
+* Should live alongside the components they test
+* Should be named after component but with .spec appended
+
+```
+conversion-service.ts
+conversion-service.spec.ts
+```
 
 ## Contributing
 

@@ -16,11 +16,11 @@ export class ConversionService {
   }
 
   lbsToKg(lbs) {
-    return lbs * 0.453592;
+    return (lbs * 0.453592).toFixed(2);
   }
 
   metresToInches(m) {
-    return m * 39.3701;
+    return (m * 39.3701).toFixed(2);
   }
 
 }

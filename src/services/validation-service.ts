@@ -122,7 +122,7 @@ export class ValidationService {
         const notANumber = isNaN(control.value);
         const notWholeNumber = control.value % 1 !== 0;
         if (notWholeNumber || !betweenZeroAndEleven || notANumber) {
-            return { 'invalidAge': true };
+            return { 'invalidInches': true };
         } else {
             return null;
         }

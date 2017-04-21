@@ -18,7 +18,7 @@ If you are familiar with nursing, cardiac rehabilitation (phase 2), pulmonary re
 
 1. clone this project `git clone git@github.com:neilbo/six-minute-walk-distance.git`
 2. install ionic `npm install -g ionic cordova`
-3. run ionic `ionic serve`
+3. run ionic serve `ionic serve` or `ionic serve -l`
 
 ## Getting started
 

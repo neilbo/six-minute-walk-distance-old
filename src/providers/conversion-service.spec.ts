@@ -1,5 +1,4 @@
 import { async, TestBed, inject } from '@angular/core/testing';
-import { IonicModule } from "ionic-angular/index";
 import { ConversionService } from './conversion-service';
 
 describe('ConversionService', () => {

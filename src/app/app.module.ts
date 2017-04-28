@@ -11,6 +11,11 @@ import { MetricForm } from '../components/metric-form/metric-form';
 import { FormulaService } from '../providers/formula-service';
 import { CalculateService } from '../providers/calculate-service';
 import { ConversionService } from '../providers/conversion-service';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+
 
 @NgModule({
   declarations: [
@@ -24,6 +29,8 @@ import { ConversionService } from '../providers/conversion-service';
     TabsPage
   ],
   imports: [
+    BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -37,6 +44,12 @@ import { ConversionService } from '../providers/conversion-service';
     HomePage,
     TabsPage
   ],
-  providers: [FormulaService, CalculateService, ConversionService, { provide: ErrorHandler, useClass: IonicErrorHandler }]
+  providers: [
+    StatusBar,
+    SplashScreen,
+    FormulaService,
+    CalculateService,
+    ConversionService,
+    { provide: ErrorHandler, useClass: IonicErrorHandler }]
 })
 export class AppModule { }

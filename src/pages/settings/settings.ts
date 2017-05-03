@@ -17,11 +17,6 @@ export class SettingsPage {
       this.measurementType = this.settingService.getMeasurementType();
   }
   
-  setFormula() {
-    console.log('formula', this.formula);
-    this.settingService.setFormula(this.formula);
-  }
-
   setMeasurementType() {
     console.log('SettingsPage:measurementType', this.measurementType);
     this.settingService.setMeasurementType(this.measurementType);

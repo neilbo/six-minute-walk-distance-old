@@ -9,18 +9,18 @@
 <ion-content>
   <ion-list radio-group [(ngModel)]="measurementType">
     <ion-list-header>
-      Choose a measurement type
+      set a default system
     </ion-list-header>
     <ion-item>
-      <ion-label>Metric</ion-label>
+      <ion-label>Metric (cm, kg)</ion-label>
       <ion-radio value="metric" (click)="setMeasurementType()"></ion-radio>
     </ion-item>
     <ion-item>
-        <ion-label>Imperial</ion-label>
+        <ion-label>Imperial (inches, feet, lbs)</ion-label>
         <ion-radio value="imperial" (click)="setMeasurementType()"></ion-radio>
     </ion-item>
   </ion-list>
-  <ion-list radio-group [(ngModel)]="formula">
+  <!--<ion-list radio-group [(ngModel)]="formula">
     <ion-list-header>
       Choose a formula
     </ion-list-header>
@@ -32,5 +32,5 @@
         <ion-label>Jenkins</ion-label>
         <ion-radio value="jenkins" (click)="setFormula()"></ion-radio>
     </ion-item>
-  </ion-list>
+  </ion-list>-->
 </ion-content>

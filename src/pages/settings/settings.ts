@@ -23,7 +23,7 @@ export class SettingsPage {
   }
 
   setMeasurementType() {
-    console.log('measurementType', this.measurementType);
+    console.log('SettingsPage:measurementType', this.measurementType);
     this.settingService.setMeasurementType(this.measurementType);
   }
   getMeasurementType() {

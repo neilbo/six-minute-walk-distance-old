@@ -21,16 +21,5 @@ export class SettingsService {
       return this.storedMeasurement = window.localStorage.getItem('measurementType');
     }
   }
-
-  setFormula(value) {
-    console.log('setFormula value', value);
-    window.localStorage.setItem('formula', value);
-  }
-
-  getFormula() {
-    let storedFormula = window.localStorage.getItem('formula');
-    console.log('storedFormula', storedFormula);
-    return storedFormula;
-  }
-
+  
 }

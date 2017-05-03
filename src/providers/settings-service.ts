@@ -16,10 +16,10 @@ export class SettingsService {
 
   getMeasurementType() {
     if (_.isEmpty(this.storedMeasurement)) {
-      return this.storedMeasurement = 'metric';
+      return 'metric';
     } else {
-      return this.storedMeasurement = window.localStorage.getItem('measurementType');
+      return window.localStorage.getItem('measurementType');
     }
   }
-  
+
 }

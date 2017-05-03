@@ -24,3 +24,26 @@
 .list-md {
     margin-bottom: 0;
 }
+
+
+.item-ios.item-label-stacked .text-input, .item-ios.item-label-floating .text-input {
+    margin-left: 8px;
+}
+
+.text-input-md, .item-label-floating .text-input-md {
+    margin-left: 8px;
+}
+
+.item-input ion-input {
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.label-ios[floating],
+.label-md[floating] {
+    margin-left: 8px;
+}
+ 
+.item-ios, .item-md {
+    padding-left: 8px;
+}

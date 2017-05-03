@@ -24,9 +24,9 @@ describe('SettingsService', () => {
     });
 
     describe('getMeasurementType', () => {
-        
+
         it('should set measurementType to metric if undefined, null, empty', inject([SettingsService], (SettingsService) => {
-            SettingsService.storedMeasurement = undefined;
+            SettingsService.storedMeasurement = undefined || null || '';
             SettingsService.getMeasurementType();
             expect(SettingsService.getMeasurementType()).toBe('metric');
         }));

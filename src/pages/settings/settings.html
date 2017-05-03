@@ -7,6 +7,19 @@
 </ion-header>
 
 <ion-content>
+  <ion-list radio-group [(ngModel)]="measurementType">
+    <ion-list-header>
+      Choose a measurement type
+    </ion-list-header>
+    <ion-item>
+      <ion-label>Metric</ion-label>
+      <ion-radio value="metric" (click)="setMeasurementType()"></ion-radio>
+    </ion-item>
+    <ion-item>
+        <ion-label>Imperial</ion-label>
+        <ion-radio value="imperial" (click)="setMeasurementType()"></ion-radio>
+    </ion-item>
+  </ion-list>
   <ion-list radio-group [(ngModel)]="formula">
     <ion-list-header>
       Choose a formula

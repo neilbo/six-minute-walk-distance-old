@@ -1,10 +1,21 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class FormulaService {
+export class SettingsService {
+  measurementSystem: any = 'imperial';
 
   constructor() {
-    console.log('Hello FormulaService Provider');
+    console.log('Hello SettngsService Provider');
+  }
+
+  setMeasurementType(value) {
+    this.measurementSystem = value;
+  }
+
+  getMeasurementType() {
+    console.log('SettingsService.getMeasurementType', this.measurementSystem);
+    return this.measurementSystem;
+
   }
 
   setFormula(value) {

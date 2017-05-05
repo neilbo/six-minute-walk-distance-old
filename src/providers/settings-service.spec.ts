@@ -15,27 +15,36 @@ describe('SettingsService', () => {
     }));
 
     describe('setMeasurementType', () => {
-        it('should set default measurement type', inject([SettingsService], (SettingsService) => {
+        it('should assign value to storedMeasurement', inject([SettingsService], (SettingsService) => {
             let value = 'blah';
-            spyOn(window.localStorage, 'setItem');
             SettingsService.setMeasurementType(value);
-            expect(window.localStorage.setItem).toHaveBeenCalledWith('measurementType', value);
+            expect(SettingsService.storedMeasurement).toBe('blah');
         }));
     });
 
     describe('getMeasurementType', () => {
 
-        it('should set measurementType to metric if undefined, null, empty', inject([SettingsService], (SettingsService) => {
+        it('should set storedMeasurement to metric if undefined', inject([SettingsService], (SettingsService) => {
             SettingsService.storedMeasurement = undefined;
             SettingsService.getMeasurementType();
             expect(SettingsService.storedMeasurement).toBe('metric');
         }));
 
-        it('should get measurementType that was set', inject([SettingsService], (SettingsService) => {
-            SettingsService.storedMeasurement = 'metric';
-            spyOn(window.localStorage, 'getItem').and.returnValue('imperial');
+        it('should set storedMeasurement to metric if null', inject([SettingsService], (SettingsService) => {
+            SettingsService.storedMeasurement = null;
             SettingsService.getMeasurementType();
-            expect(window.localStorage.getItem).toHaveBeenCalledWith('measurementType');
+            expect(SettingsService.storedMeasurement).toBe('metric');
+        }));
+
+        it('should set storedMeasurement to metric if empty string', inject([SettingsService], (SettingsService) => {
+            SettingsService.storedMeasurement = '';
+            SettingsService.getMeasurementType();
+            expect(SettingsService.storedMeasurement).toBe('metric');
+        }));
+
+        it('should get storedMeasurement that was set', inject([SettingsService], (SettingsService) => {
+            SettingsService.storedMeasurement = 'imperial';
+            SettingsService.getMeasurementType();
             expect(SettingsService.getMeasurementType()).toBe('imperial');
         }));
     });

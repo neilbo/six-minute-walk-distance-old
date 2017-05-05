@@ -10,8 +10,7 @@ export class SettingsService {
   }
 
   setMeasurementType(value) {
-    console.log('SettngsService:measurementType value', value);
-    window.localStorage.setItem('measurementType', value);
+    this.storedMeasurement = value;
   }
 
   getMeasurementType() {
@@ -19,7 +18,6 @@ export class SettingsService {
       this.storedMeasurement = 'metric';
       return this.storedMeasurement;
     } else {
-      this.storedMeasurement = window.localStorage.getItem('measurementType');
       return this.storedMeasurement;
     }
   }

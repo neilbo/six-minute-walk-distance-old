@@ -35,8 +35,19 @@
 }
 
 .item-input ion-input {
-    border: 1px solid;
+    border: 1px solid map-get($colors, primary);
     border-radius: 5px;
+}
+
+ion-item {
+    &.gender-radio {
+        border: 1px solid map-get($colors, primary)!important;
+        border-radius: 5px !important;
+    }
+}
+
+ion-label {
+    color: map-get($colors, primary);
 }
 
 .label-ios[floating],

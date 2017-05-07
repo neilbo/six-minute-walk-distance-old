@@ -41,18 +41,28 @@ export class ImperialForm {
       _.isEmpty(this.form.genderImperial) ||
       _.isEmpty(this.form.ageImperial);
 
+    console.log('feet', this.form.feet);
+    console.log('inches', this.form.inches);
+    console.log('gender', this.form.genderImperial);
+    console.log('age', this.form.ageImperial);
+
     let heightInInches = _.toNumber(this.convert.feetToInches(this.form.feet)) + _.toNumber(this.form.inches);
-    let heightInCm = this.convert.cmToInches(heightInInches);
+    let heightInCm = this.convert.inchesToCentimetres(heightInInches);
     let weightKgs = this.convert.lbsToKg(this.form.lbs);
 
+    console.log('heightInInches', heightInInches);
+    console.log('heightInCm', heightInCm);
+    console.log('weightKgs', weightKgs);
     console.log(this.calculate.enrightForumla(heightInCm, weightKgs, this.form.ageImperial, this.form.genderImperial) + 'm');
 
     let distanceInches = this.convert.metresToInches(this.calculate.enrightForumla(heightInCm, weightKgs, this.form.ageImperial, this.form.genderImperial));
-    this.formatDistance(distanceInches);
+    console.log('distanceInches', distanceInches);
+    
+    // this.formatDistance(distanceInches);
 
     if (!this.formEmpty) {
-      let imperialDistance = this.convert.metresToInches(distanceInches);
-      this.showDistance(this.formatDistance(imperialDistance));
+      
+      this.showDistance(this.formatDistance(distanceInches));
     } else {
       this.showError('Error', `Check that all fields <br />have been filled in.`);
     }
@@ -85,9 +95,12 @@ export class ImperialForm {
   }
 
   formatDistance(inches) {
+    inches = _.toNumber(inches);
+    debugger;
+    
     let feet = Math.floor(inches / 12);
-    inches %= 12;
-    return feet + 'ft ' + inches.toFixed(2) + 'in';
+    console.log('formatDistance feet: ', feet);
+    return feet + 'ft';
   }
 
   resetForm() {

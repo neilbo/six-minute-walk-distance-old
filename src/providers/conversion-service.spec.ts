@@ -20,9 +20,9 @@ describe('ConversionService', () => {
         }));
     });
 
-    describe('cmToInches', () => {
-        it('should convert cm to inches', inject([ConversionService], (ConversionService) => {
-            expect(ConversionService.cmToInches(1)).toBe(0.3937);
+    describe('inchesToCentimetres', () => {
+        it('should convert inches to cm', inject([ConversionService], (ConversionService) => {
+            expect(ConversionService.inchesToCentimetres(1)).toBe(2.54);
         }));
     });
 
@@ -34,7 +34,7 @@ describe('ConversionService', () => {
 
     describe('metresToInches', () => {
         it('should convert metres to inches', inject([ConversionService], (ConversionService) => {
-            expect(ConversionService.metresToInches(10)).toBe('393.70');
+            expect(ConversionService.metresToInches(1)).toBe('39.37');
         }));
     });
 

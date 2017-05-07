@@ -11,8 +11,12 @@ export class ConversionService {
     return feet * 12;
   }
 
-  cmToInches(inches) {
-    return inches * 0.39370;
+  cmToInches(cm) {
+    return cm * 0.39370;
+  }
+
+  inchesToCentimetres(inches) {
+    return inches * 2.54;
   }
 
   lbsToKg(lbs) {

@@ -16,13 +16,13 @@ describe('ConversionService', () => {
 
     describe('feetToInches', () => {
         it('should convert feet to inches', inject([ConversionService], (ConversionService) => {
-            expect(ConversionService.feetToInches(5)).toBe(60);
+            expect(ConversionService.feetToInches(1)).toBe(12);
         }));
     });
 
     describe('cmToInches', () => {
         it('should convert cm to inches', inject([ConversionService], (ConversionService) => {
-            expect(ConversionService.cmToInches(3)).toBe(7.62);
+            expect(ConversionService.cmToInches(1)).toBe(0.3937);
         }));
     });
 

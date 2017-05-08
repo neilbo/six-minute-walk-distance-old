@@ -46,10 +46,6 @@ ion-item {
     }
 }
 
-ion-label {
-    color: map-get($colors, primary);
-}
-
 .label-ios[floating],
 .label-md[floating] {
     margin-left: 8px;

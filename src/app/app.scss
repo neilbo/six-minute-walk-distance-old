@@ -54,3 +54,13 @@ ion-item {
 .item-ios, .item-md {
     padding-left: 8px;
 }
+
+.list-md .item-input:last-child {
+    border-bottom: none !important;
+}
+
+.item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus) .item-inner,
+.item-md.item-input.input-has-focus .item-inner {
+    border-bottom-color: none !important;
+    box-shadow: none !important;
+}
